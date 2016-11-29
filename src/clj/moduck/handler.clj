@@ -15,6 +15,7 @@
 (defroutes routes
   (context "/api" []
     (POST "/" request
+      (println request)
       {
        "color" "green",
        "message" request,
