@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/uglybird.jar clojure.main -m uglybird.server
+web: java $JVM_OPTS -cp target/moduck.jar clojure.main -m moduck.server

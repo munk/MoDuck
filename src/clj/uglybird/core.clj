@@ -1,1 +1,0 @@
-(ns uglybird.core)

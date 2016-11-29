@@ -1,4 +1,4 @@
-(defproject uglybird "0.1.0-SNAPSHOT"
+(defproject moduck "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.229"]
                  [reagent "0.6.0"]
@@ -20,7 +20,7 @@
                                     "test/js"]
 
   :figwheel {:css-dirs ["resources/public/css"]
-             :ring-handler uglybird.handler/dev-handler}
+             :ring-handler moduck.handler/dev-handler}
 
   :profiles
   {:dev
@@ -34,8 +34,8 @@
   {:builds
    [{:id           "dev"
      :source-paths ["src/cljs"]
-     :figwheel     {:on-jsload "uglybird.core/mount-root"}
-     :compiler     {:main                 uglybird.core
+     :figwheel     {:on-jsload "moduck.core/mount-root"}
+     :compiler     {:main                 moduck.core
                     :output-to            "resources/public/js/compiled/app.js"
                     :output-dir           "resources/public/js/compiled/out"
                     :asset-path           "js/compiled/out"
@@ -47,7 +47,7 @@
     {:id           "min"
      :source-paths ["src/cljs"]
      :jar true
-     :compiler     {:main            uglybird.core
+     :compiler     {:main            moduck.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
@@ -55,17 +55,17 @@
 
     {:id           "test"
      :source-paths ["src/cljs" "test/cljs"]
-     :compiler     {:main          uglybird.runner
+     :compiler     {:main          moduck.runner
                     :output-to     "resources/public/js/compiled/test.js"
                     :output-dir    "resources/public/js/compiled/test/out"
                     :optimizations :none}}
     ]}
 
-  :main uglybird.server
+  :main moduck.server
 
-  :aot [uglybird.server]
+  :aot [moduck.server]
 
-  :uberjar-name "uglybird.jar"
+  :uberjar-name "moduck.jar"
 
   :prep-tasks [["cljsbuild" "once" "min"] "compile"]
   )
