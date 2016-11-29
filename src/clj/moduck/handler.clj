@@ -14,9 +14,18 @@
 
 (defroutes routes
   (context "/api" []
+    (POST "/" request
+      {
+       "color" "green",
+       "message" request,
+       "notify" false,
+       "message_format" "text"
+       })
       (context "/quacks" []
         (GET "/" [])
-        (POST "/" []))
+        (POST "/" []
+
+          ))
     (context "/sessions" []
       (GET "/" [])
       (POST "/" []))
