@@ -5,15 +5,6 @@
             [compojure.api.sweet :refer [context]]
             [ring.middleware.reload :refer [wrap-reload]]))
 
-#_(defn create-user [req]
-  (let [conn (:db-conn req)
-        {:keys [username password]} (:body req)
-        password (encrypt password)
-        _ (db/create-user conn username password)
-        user (db/find-user-by-username conn username)]
-    (-> (resp/response {:name username})
-        (assoc :session (assoc (:session req) :identity user)))))
-
 (defn get-all-data [])
 (defn get-potoos [])
 (defn create-potoo [])
@@ -23,7 +14,7 @@
 
 (defroutes routes
   (context "/api" []
-      (context "/potoos" []
+      (context "/quacks" []
         (GET "/" [])
         (POST "/" []))
     (context "/sessions" []
@@ -48,20 +39,3 @@
 (defn moduck-handler [db-connection]
   (-> routes
       (wrap-connection db-connection)))
-
-(defrecord WebServer [opts container postgres-connection]
-  component/Lifecycle
-  (start [component]
-    (log/info "Starting web server with params:" opts)
-    (let [req-handler (moduck-handler (:db-spec postgres-connection))
-          container (run-jetty req-handler opts)]
-      (assoc component :container container)))
-  (stop [component]
-    (log/info "Stopping web server")
-    (.stop container)
-    component))
-
-
-(comment
-
-  )
